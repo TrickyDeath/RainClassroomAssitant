@@ -14,12 +14,12 @@
 ### 使用前准备
 **1. 使用前需要关闭所有代理程序**
 ### 获取sessionid
-1. 登录雨课堂网页版
+1. 登录雨课堂网页版。
 2. 点击F12，打开网页调试器，找到存储（Storage），并找到sessionid，圈的部分就是你sessionid的值，如下图：
 ![网页调试器](/help_pic/sessionid.png)
 ### 使用程序
-1. 下载release的[RainClassroomAssistant.exe](https://github.com/TrickyDeath/RainClassroomAssitant/releases/tag/v0.0.1)，并点击运行，
-2. 首次运行会生成一个config.json在同目录下，需要打开config.json设置你的sessionid，例如你的sessionid为123456，则如下填写
+1. 下载release的[RainClassroomAssistant.exe](https://github.com/TrickyDeath/RainClassroomAssitant/releases/tag/v0.0.1)，并点击运行。
+2. 首次运行会生成一个config.json在同目录下，需要打开config.json设置你的sessionid，例如你的sessionid为123456，则如下填写。
 ```
 {"sessionid": "123456","auto_danmu": true,"danmu_limit": 10,"im_called": false}
 ```
@@ -29,7 +29,6 @@ auto_danmu为自动发送弹幕开关，true为开，false为关
 danmu_limit为自动发送弹幕的阈值，在60秒内收到danmu_limit次同样内容的弹幕后，将会自动发送该条弹幕
 im_called为点名语音提醒配置，true为仅自己被点到时才会语音提醒，false为只要老师点名就会语音提醒
 ```
-3. 之后只需要运行RainClassroomAssistant.exe，即可开始监听
-注：
-只要你不点击退出登录，sessionid很长时间才会过期，如果sessionid失效，重新[获取sessionid](#获取sessionid)即可
-当然也可以直接下载源代码，并安装requirement.txt中的第三方库，直接使用Python运行
+3. 之后只需要运行RainClassroomAssistant.exe，即可开始监听。<br />
+注：只要你不点击退出登录，sessionid很长时间才会过期，如果sessionid失效，重新[获取sessionid](#获取sessionid)即可<。br />
+当然也可以直接下载源代码，并安装requirement.txt中的第三方库，直接使用Python运行。<br />
