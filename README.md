@@ -30,5 +30,5 @@ danmu_limit为自动发送弹幕的阈值，在60秒内收到danmu_limit次同�
 im_called为点名语音提醒配置，true为仅自己被点到时才会语音提醒，false为只要老师点名就会语音提醒
 ```
 3. 之后只需要运行RainClassroomAssistant.exe，即可开始监听。<br />
-注：只要你不点击退出登录，sessionid很长时间才会过期，如果sessionid失效，重新[获取sessionid](#获取sessionid)即可<。br />
+注：只要你不点击退出登录，sessionid很长时间才会过期，如果sessionid失效，重新[获取sessionid](#获取sessionid)即可。<br />
 当然也可以直接下载源代码，并安装requirement.txt中的第三方库，直接使用Python运行。<br />
