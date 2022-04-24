@@ -17,7 +17,7 @@ if __name__ == "__main__":
     network_status = True
     while True:
         try:
-            lesson_list = get_on_lesson()
+            code,lesson_list = get_on_lesson()
         except requests.exceptions.ConnectionError:
             meg = "网络异常，监听中断"
             threading.Thread(target=say_something,args=(meg,)).start()
@@ -29,7 +29,7 @@ if __name__ == "__main__":
             ret = test_network()
             if ret == True:
                 try:
-                    lesson_list = get_on_lesson()
+                    code,lesson_list = get_on_lesson()
                 except:
                     pass
                 else:
