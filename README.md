@@ -16,7 +16,7 @@
 2. 点击F12，打开网页调试器，找到存储（Storage），并找到sessionid，圈的部分就是你sessionid的值，如下图：
 ![网页调试器](/help_pic/sessionid.png)
 ### 使用程序
-1. 下载release的RainClassroomAssistant.exe，并点击运行
+1. 下载release的[RainClassroomAssistant.exe](https://github.com/TrickyDeath/RainClassroomAssitant/releases/tag/v0.0.1)，并点击运行，
 2. 首次运行会生成一个config.json在同目录下，需要打开config.json设置你的sessionid，例如你的sessionid为123456，则如下填写
 '''
 {"sessionid": "123456","auto_danmu": true,"danmu_limit": 10,"im_called": false}
