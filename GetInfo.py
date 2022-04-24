@@ -37,6 +37,11 @@ def get_on_lesson():
 
 if not os.path.exists("./config.json"):
     initialize_config()
+    meg = "检测到首次运行，已创建config.json，请打开config.json配置sessionid后再运行"
+    speak_thread = threading.Thread(target=say_something,args=(meg,))
+    speak_thread.start()
+    speak_thread.join()
+    sys.exit()
 f = open(r"./config.json","r")
 data_dict = json.load(f)
 initial_data  = get_initial_data()
