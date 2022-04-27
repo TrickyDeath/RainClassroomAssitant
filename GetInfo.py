@@ -15,12 +15,7 @@ def get_initial_data():
     return initial_data
 
 def initialize_config():
-    initial_data = {
-        "sessionid":"",
-        "auto_danmu":True,
-        "danmu_limit":10,
-        "im_called":False
-    }
+    initial_data = get_initial_data()
     f = open(r"./config.json","w+")
     json.dump(initial_data,f)
     f.close()
@@ -42,6 +37,7 @@ if not os.path.exists("./config.json"):
     speak_thread.start()
     speak_thread.join()
     sys.exit()
+
 f = open(r"./config.json","r")
 data_dict = json.load(f)
 initial_data  = get_initial_data()

@@ -17,8 +17,7 @@ class Lesson:
             "User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:97.0) Gecko/20100101 Firefox/97.0",
         }
         self.receive_danmu = {}
-        self.sent_damu = []
-        self.danmu_list = []
+        self.sent_danmu_dict = {}
         self.danmu_dict = {}
         self.problems_ls = []
         self.unlocked_problem = []
@@ -102,45 +101,26 @@ class Lesson:
         elif op == "presentationcreated":
             self.problems_ls.extend(self.get_problems(data["presentation"]))
         elif op == "newdanmu" and AUTO_DANMU:
-            # try:
-            #     self.danmu_dict[data["danmu"].lower()].append(time.time())
-            # except KeyError:
-            #     self.danmu_dict[data["danmu"].lower()] = [time.time()]
-            
-            # for content in self.danmu_dict.keys():
-            #     for j in self.danmu_dict[content].values():
-            #         if time.time() - j > 60:
-            #             self.danmu_dict[content].remove(j)
-            #     count = len(self.danmu_dict[content])
-            #     if content not in self.sent_damu:
-            #         if count >= DANMU_LIMIT:
-            #             self.send_danmu(content)
-            #             self.sent_damu.append(Danmu)
-            #     else:
-            # print("%()" % user_dict[])
-            danmu_obj = Danmu(data["danmu"].lower())
-            self.danmu_list.append(danmu_obj)
-            for i in self.sent_damu:
-                if time.time() - i.time > 60:
-                    self.sent_damu.remove(i)
-            sent_content_ls = [j.content for j in self.sent_damu]
-            for i in self.danmu_list:
-                if time.time() - i.time > 60:
-                    self.danmu_list.remove(i)
+            current_content = data["danmu"].lower()
+            now = time.time()
+            # 收到一条弹幕，尝试取出其之前的所有记录的列表，取不到则初始化该内容列表
+            try:
+                same_content_ls = self.danmu_dict[current_content]
+            except KeyError:
+                self.danmu_dict[current_content] = []
+                same_content_ls = self.danmu_dict[current_content]
+            #清除超过60秒的弹幕记录
+            for i in same_content_ls:
+                if now - i > 60:
+                    same_content_ls.remove(i)
+            # 如果当前的弹幕没被发过，或者已发送时间超过60秒
+            if current_content not in self.sent_danmu_dict.keys() or now - self.sent_danmu_dict[current_content] > 60:
+                if len(same_content_ls) + 1 >= DANMU_LIMIT:
+                    self.send_danmu(current_content)
+                    same_content_ls = []
+                    self.sent_danmu_dict[current_content] = now
                 else:
-                    if i.content in list(self.danmu_dict.keys()):
-                        self.danmu_dict[i.content] += 1
-                    else:
-                        self.danmu_dict[i.content] = 1
-                    if i.content in sent_content_ls:
-                        self.danmu_dict[i.content] = 1
-            for i in self.sent_damu:
-                if time.time() - i.time > 60:
-                    self.sent_damu.remove(i)
-            for content in self.danmu_dict.keys():
-                if self.danmu_dict[content] >= DANMU_LIMIT and content not in sent_content_ls:
-                    self.send_danmu(content)
-                    self.sent_damu.append(Danmu(content))
+                    same_content_ls.append(now)
         elif op == "callpaused":
             meg = "%s点名了，点到了：%s" % (self.lessonname, data["name"])
             if IM_CALLED:
@@ -200,14 +180,6 @@ class Lesson:
     
     def __eq__(self, other):
         return self.lessonid == other.lessonid
-
-class Danmu:
-    def __init__(self, content):
-        self.content = content
-        self.time = time.time()
-
-    def __eq__(self, other):
-        return (self.content == other.content) and (self.time == other.time)
 
 class User:
     def __init__(self, uid):
