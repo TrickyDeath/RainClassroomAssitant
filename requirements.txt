@@ -1,0 +1,5 @@
+PyQt5==5.15.7
+pyttsx3==2.90
+requests==2.27.1
+urllib3==1.26.4
+websocket_client==1.4.0
