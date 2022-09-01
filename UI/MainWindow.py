@@ -164,7 +164,7 @@ class MainWindow_Ui(QtCore.QObject):
         config_route = get_config_path()
         self.config = self.check_config(dir_route, config_route)
 
-        self.add_message_signal.emit("当前版本：V1.2",0)
+        self.add_message_signal.emit("当前版本：v0.0.4",0)
         self.add_message_signal.emit("初始化完成",0)
 
         # 登录状态检查
@@ -320,10 +320,12 @@ class MainWindow_Ui(QtCore.QObject):
         # 停止
         self.active_btn.setText("停止中...")
         self.active_btn.setEnabled(False)
+        # 强制刷新UI
+        QtWidgets.qApp.processEvents()
         self.is_active = False
         self.monitor_t.join()
-        self.active_btn.setText("启动")
         self.active_btn.setEnabled(True)
+        self.active_btn.setText("启动")
         self.add_message_signal.emit("停止成功",0)
 
     def audio(self, message, type):
@@ -352,4 +354,4 @@ class MainWindow_Ui(QtCore.QObject):
             (type == 6 and audio_type["others_called"]) or \
             (type == 7 and audio_type["course_info"]) or \
             (type == 8 and audio_type["network_info"]) :
-                threading.Thread(target=say_something,args=(message,)).start()                
+                threading.Thread(target=say_something,args=(message,)).start()
