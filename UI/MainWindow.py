@@ -354,4 +354,4 @@ class MainWindow_Ui(QtCore.QObject):
             (type == 6 and audio_type["others_called"]) or \
             (type == 7 and audio_type["course_info"]) or \
             (type == 8 and audio_type["network_info"]) :
-                threading.Thread(target=say_something,args=(message,)).start()
+                threading.Thread(target=say_something,args=(message,),daemon=True).start()

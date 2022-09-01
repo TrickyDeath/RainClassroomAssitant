@@ -138,7 +138,7 @@ class Lesson:
             except KeyError:
                 self.danmu_dict[current_content] = []
                 same_content_ls = self.danmu_dict[current_content]
-            #清除超过60秒的弹幕记录
+            # 清除超过60秒的弹幕记录
             for i in same_content_ls:
                 if now - i > 60:
                     same_content_ls.remove(i)
