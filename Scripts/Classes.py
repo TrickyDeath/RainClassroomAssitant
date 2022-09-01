@@ -1,11 +1,9 @@
-from operator import index
 import requests
 import threading
 import random
 import time
 import websocket
 import json
-import winreg
 from Scripts.Utils import get_user_info, dict_result, calculate_waittime
 
 wss_url = "wss://www.yuketang.cn/wsapp/"
