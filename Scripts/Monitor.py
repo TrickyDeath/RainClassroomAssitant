@@ -59,7 +59,7 @@ def monitor(main_ui):
             classroomid = lesson["classroomId"]
             lesson_obj = Lesson(lessionid,lessonname,classroomid,main_ui)
             if lesson_obj not in on_lesson_list:
-                thread = threading.Thread(target=lesson_obj.start_lesson,args=(del_onclass,))
+                thread = threading.Thread(target=lesson_obj.start_lesson,args=(del_onclass,),daemon=True)
                 thread.start()
                 meg = "检测到课程%s正在上课，已加入监听列表" % lessonname
                 main_ui.add_message_signal.emit(meg,7)

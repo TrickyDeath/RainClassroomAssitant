@@ -159,10 +159,10 @@ class Login_Ui(object):
         login_wss_url = "wss://www.yuketang.cn/wsapp/"
         # 开启websocket线程和定时刷新二维码线程
         self.wsapp = websocket.WebSocketApp(url=login_wss_url,on_open=on_open,on_message=on_message,on_close=on_close)
-        self.wsapp_t = threading.Thread(target=self.wsapp.run_forever)
+        self.wsapp_t = threading.Thread(target=self.wsapp.run_forever,daemon=True)
         self.wsapp_t.start()
         self.flush_on = True
-        self.flush_t = threading.Thread(target=self._flush_login_QRcode)
+        self.flush_t = threading.Thread(target=self._flush_login_QRcode,daemon=True)
         self.flush_t.start()
 
     def retranslateUi(self, Dialog):
